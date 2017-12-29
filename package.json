@@ -4,7 +4,7 @@
   "description": "Small Vanilla JS utility for binding events between DOMNode and a simple controller.",
   "main": "src/index.js",
   "scripts": {
-    "lint":"eslint src test",
+    "lint": "eslint src test",
     "prebuild": "npm run lint",
     "build": "npm run es5-build && npm run bundles-build && uglifyjs dist/index.js -m -o dist/index.min.js",
     "es5-build": "babel src -d dist/es5",
