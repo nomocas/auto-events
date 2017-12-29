@@ -1,13 +1,12 @@
 {
-  "name": "es6-rb-mc-k-i-boilerplate",
-  "version": "0.1.1",
-  "description": "Full ES6 module boilerplate with rollup/babel, mocha/chai/karma/istanbul, coveralls, travis, conventional commit, pre-push and pre-commit check",
-  "main": "dist/bundles/index.js",
-  "module": "dist/bundles/index.mjs",
-  "jsnext:main": "dist/bundles/index.mjs",
+  "name": "auto-events",
+  "version": "1.0.0",
+  "description": "Small Vanilla JS utility for binding events between DOMNode and a simple controller.",
+  "main": "src/index.js",
   "scripts": {
-    "prebuild": "eslint src test",
-    "build": "npm run es5-build && npm run bundles-build && uglifyjs dist/bundles/index.js -m -o dist/bundles/index.min.js",
+    "lint":"eslint src test",
+    "prebuild": "npm run lint",
+    "build": "npm run es5-build && npm run bundles-build && uglifyjs dist/index.js -m -o dist/index.min.js",
     "es5-build": "babel src -d dist/es5",
     "es5-watch": "babel src -d dist/es5 -w",
     "bundles-build": "rollup -c",
@@ -32,10 +31,8 @@
     "instrument": false
   },
   "keywords": [
-    "es6",
-    "boilerplate",
-    "test",
-    "coverage"
+    "dom-events",
+    "controller"
   ],
   "author": "Gilles Coomans",
   "license": "MIT",

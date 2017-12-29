@@ -15,11 +15,11 @@ export default {
 	],
 	external,
 	targets: [{
-		dest: pkg.main,
+		dest: 'dist/index.js',
 		format: 'cjs',
 		sourceMap: true
 	}, {
-		dest: pkg.module,
+		dest: 'dist/index.mjs',
 		format: 'es',
 		sourceMap: true
 	}]
