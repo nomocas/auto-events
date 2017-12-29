@@ -2,7 +2,7 @@
   "presets": [
     "env"
   ],
-  "plugins": ["transform-object-rest-spread"],
+  "plugins": [],
   "env": {
     "test": {
       "plugins": [
