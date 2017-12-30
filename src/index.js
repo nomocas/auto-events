@@ -3,20 +3,11 @@
  *
  * Auto bind events on DOM nodes with methods from a controller.
  *
- * A controller is just a simple object with at least an "init" function that take no arguments.
- * aka :
- * ```javascript
- * module.exports = {
- *    init() { ... }
- * };
- * ```
- *
- * @TODO: Add data-ev-init : immediate execution on initialisation
  */
 
 /* eslint curly:0, no-param-reassign:0 */
 const debug = require('debug')('autoevents');
-const functionCallParser = require('elenpi-simple-function-call-parser');
+const functionCallParser = require('elenpi-simple-function-call-parser/src/index');
 const eventAttributeMatcher = /^data-ev-(\w+)/i;
 const autoEvents = {
 	devMode: false
