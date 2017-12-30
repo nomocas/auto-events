@@ -1,6 +1,6 @@
 {
   "name": "auto-events",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Small Vanilla JS utility for binding events between DOMNode and a simple controller.",
   "main": "src/index.js",
   "scripts": {
