@@ -55,7 +55,7 @@
     "validate-commit-msg": "^2.12.1"
   },
   "dependencies": {
-    "elenpi-simple-function-call-parser": "^1.0.3"
+    "elenpi-simple-function-call-parser": "^1.0.4"
   },
   "config": {
     "commitizen": {
