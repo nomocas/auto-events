@@ -12,9 +12,8 @@
     "bundles-build": "rollup -c",
     "bundles-watch": "rollup -c -w",
     "pretest": "npm run build",
-    "test": "mocha",
-    "karma": "karma start",
-    "cover": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha test/*.js",
+    "test": "jest --forceExit test",
+    "cover": "jest --forceExit --coverage test",
     "coveralls": "npm run cover && cat ./coverage/lcov.info | coveralls",
     "prepublish": "npm test",
     "precommit": "npm run prebuild",
@@ -22,13 +21,6 @@
     "commitmsg": "validate-commit-msg",
     "cmtz": "git-cz",
     "release": "standard-version"
-  },
-  "nyc": {
-    "require": [
-      "babel-register"
-    ],
-    "sourceMap": false,
-    "instrument": false
   },
   "keywords": [
     "dom-events",
@@ -46,21 +38,13 @@
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.14.0",
     "babelrc-rollup": "^3.0.0",
-    "chai": "^3.5.0",
     "commitizen": "^2.9.6",
     "coveralls": "^2.13.0",
-    "cross-env": "^5.0.0",
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^3.15.0",
     "eslint-plugin-import": "^2.2.0",
     "husky": "^0.13.3",
-    "karma": "^1.4.1",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-mocha": "^1.3.0",
-    "karma-rollup-preprocessor": "^4.0.0",
-    "mocha": "^3.2.0",
-    "nyc": "^10.2.0",
+    "jest": "^22.0.4",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
