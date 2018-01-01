@@ -2,7 +2,8 @@
 
 > small utility to bind DOMNode events to simple controller
 
-<!-- [![Travis branch](https://img.shields.io/travis/nomocas/auto-events/master.svg)](https://travis-ci.org/nomocas/auto-events) -->
+[![Travis branch](https://img.shields.io/travis/nomocas/auto-events/master.svg)](https://travis-ci.org/nomocas/auto-events)
+[![Coverage Status](https://coveralls.io/repos/github/nomocas/auto-events/badge.svg?branch=master)](https://coveralls.io/github/nomocas/auto-events?branch=master)
 [![bitHound Overall Score](https://www.bithound.io/github/nomocas/auto-events/badges/score.svg)](https://www.bithound.io/github/nomocas/auto-events)
 [![bitHound Dependencies](https://www.bithound.io/github/nomocas/auto-events/badges/dependencies.svg)](https://www.bithound.io/github/nomocas/auto-events/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/nomocas/auto-events/badges/devDependencies.svg)](https://www.bithound.io/github/nomocas/auto-events/master/dependencies/npm)

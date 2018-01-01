@@ -1,13 +1,7 @@
-/* global describe, it, expect */
+/* global describe, it, expect, afterEach */
 const autoEvents = require('../src/index');
 
-// autoEvents.parseMethod('delete(foo)'); /*?.*/
-// autoEvents.parseMethod('send(foo, 23)'); /*?*/
-// autoEvents.parseMethod('bar'); /*?*/
-// autoEvents.parseMethod('goo(hop)'); /*?*/
-
 /** Mock node */
-
 class Node {
 	constructor(attributes) {
 		this.events = 0;
@@ -29,7 +23,9 @@ class Event {
 
 
 
-
+afterEach(() => {
+	autoEvents.devMode = false;
+});
 describe('should bind click event', () => {
 	const node = new Node([{
 		name: 'data-ev-click',
@@ -61,7 +57,7 @@ describe('should bind click event', () => {
 	});
 });
 
-describe('manage missing method', () => {
+describe('manage missing method (no devMode)', () => {
 	const node = new Node([{
 		name: 'data-ev-click',
 		value: 'delete()'
@@ -72,6 +68,20 @@ describe('manage missing method', () => {
 
 	it('should throw if method not found', () => {
 		expect(() => node.click()).toThrow();
+	});
+});
+
+describe('manage missing method (devMode)', () => {
+	const node = new Node([{
+		name: 'data-ev-click',
+		value: 'delete()'
+	}]);
+	const controller = {
+	};
+
+	it('should throw if method not found', () => {
+		autoEvents.devMode = true;
+		expect(() => autoEvents.bindEvents(node, controller)).toThrow();
 	});
 });
 
@@ -87,3 +97,68 @@ describe('skip non event attribute', () => {
 	});
 });
 
+function simulateClick(elem) {
+	const evt = new MouseEvent('click', {
+		bubbles: true,
+		cancelable: true,
+		view: window
+	});
+	elem.dispatchEvent(evt);
+}
+
+describe('bind through dom queries', () => {
+	document.body.innerHTML = `<div id="app" data-ev-click="delete(3)"></div>`;
+
+	const controller = {
+		delete(e, value) {
+			this.firedEvent = e;
+			this.deleted = value;
+		}
+	};
+	autoEvents.bindEvents('#app', controller);
+	simulateClick(document.getElementById('app'));
+	it('should have fired controller.delete', () => {
+		expect(controller.deleted).toBe(3);
+	});
+});
+
+
+describe('bind through direct jquery reference', () => {
+	const $ = require('jquery');
+
+	document.body.innerHTML = `<div id="app" data-ev-click="delete(3)"></div>`;
+
+	autoEvents.install($);
+
+	const controller = {
+		delete(e, value) {
+			this.firedEvent = e;
+			this.deleted = value;
+		}
+	};
+	$('#app').autoEvents(controller);
+	$('#app').click();
+	it('should have fired controller.delete', () => {
+		expect(controller.deleted).toBe(3);
+	});
+});
+
+describe('install through window.jquery', () => {
+	const $ = require('jquery');
+	window.$ = $;
+	document.body.innerHTML = `<div id="app" data-ev-click="delete(3)"></div>`;
+
+	autoEvents.install();
+
+	const controller = {
+		delete(e, value) {
+			this.firedEvent = e;
+			this.deleted = value;
+		}
+	};
+	$('#app').autoEvents(controller);
+	$('#app').click();
+	it('should have fired controller.delete', () => {
+		expect(controller.deleted).toBe(3);
+	});
+});

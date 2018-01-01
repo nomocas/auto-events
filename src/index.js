@@ -18,22 +18,25 @@ function isAllowedMethod(name, ctrl) {
 	return true;
 }
 
+function parseCallAndCheck(value, parsed, ctrl) {
+	parsed = functionCallParser.parse(value);
+	isAllowedMethod(parsed.method, ctrl);
+	return parsed;
+}
+
 function checkAttribute(node, ctrl, attrib) {
 	const matched = eventAttributeMatcher.exec(attrib.name);
-	let parsed;
 	if (matched) {
 		const eventType = matched[1];
+		let parsed;		
 		debug('bind event (%s) with : %s : on : ', eventType, attrib.value, ctrl);
-		if (autoEvents.devMode) { // immediate parsing and check of events
-			parsed = parsed || functionCallParser.parse(attrib.value);
-			isAllowedMethod(parsed.method, ctrl);
-		}
+		if (!parsed && autoEvents.devMode) // immediate parsing and check of events
+			parsed = parseCallAndCheck(attrib.value, parsed, ctrl);
 
 		node.addEventListener(eventType, e => {
-			if (!autoEvents.devMode) { // lazzy parsing and check of events 
-				parsed = parsed || functionCallParser.parse(attrib.value);
-				isAllowedMethod(parsed.method, ctrl);
-			}
+			if (!parsed && !autoEvents.devMode) // lazzy parsing and check of events 
+				parsed = parseCallAndCheck(attrib.value, parsed, ctrl);
+				
 			debug('binded event : %s ! : ', eventType, parsed.method, parsed.arguments);
 			ctrl[parsed.method](e, ...parsed.arguments);
 		});
@@ -48,7 +51,7 @@ function bindEvents(node, ctrl) {
 }
 
 autoEvents.bindEvents = bindEvents;
-autoEvents.install = function($ = window.jQuery) {
+autoEvents.install = function($ = window.$) {
 	$.fn.autoEvents = function autoEvents(ctrl) {
 		this.get().forEach(node => bindEvents(node, ctrl));
 		return this;
