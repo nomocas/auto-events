@@ -3,8 +3,8 @@ import babelrc from 'babelrc-rollup';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
-const pkg = require('./package.json');
-const external = Object.keys(pkg.dependencies);
+// const pkg = require('./package.json');
+//const external = Object.keys(pkg.dependencies);
 
 export default {
 	entry: 'src/index.js',
@@ -13,7 +13,7 @@ export default {
 		nodeResolve(),
 		commonjs()
 	],
-	external,
+	//external,
 	targets: [{
 		dest: 'dist/index.js',
 		format: 'cjs',

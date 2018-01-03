@@ -6,11 +6,9 @@
   "scripts": {
     "lint": "eslint src test",
     "prebuild": "npm run lint",
-    "build": "npm run es5-build && npm run bundles-build && uglifyjs dist/index.js -m -o dist/index.min.js",
-    "es5-build": "babel src -d dist/es5",
-    "es5-watch": "babel src -d dist/es5 -w",
-    "bundles-build": "rollup -c",
-    "bundles-watch": "rollup -c -w",
+    "build": "npm run bundles && uglifyjs dist/index.js -m -o dist/index.min.js",
+    "bundles": "rollup -c",
+    "watch": "rollup -c -w",
     "pretest": "npm run build",
     "test": "jest --forceExit test",
     "cover": "jest --forceExit --coverage test",
@@ -24,6 +22,7 @@
   },
   "keywords": [
     "dom-events",
+    "bind",
     "controller"
   ],
   "author": "Gilles Coomans",
