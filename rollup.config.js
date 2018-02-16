@@ -13,7 +13,7 @@ export default {
 		nodeResolve(),
 		commonjs()
 	],
-	//external,
+	external:['debug.js'],
 	targets: [{
 		dest: 'dist/index.js',
 		format: 'cjs',
