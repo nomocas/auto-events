@@ -6,9 +6,11 @@
  */
 
 /* eslint curly:0, no-param-reassign:0 */
-const debug = require('debug')('autoevents');
-const functionCallParser = require('elenpi-simple-function-call-parser/src/index');
+import functionCallParser from 'elenpi-simple-function-call-parser/src/index';
+const debug  = require('debug');
 const eventAttributeMatcher = /^data-ev-(\w+)/i;
+
+
 const autoEvents = {
 	devMode: false
 };

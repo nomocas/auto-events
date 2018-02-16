@@ -11,9 +11,11 @@ export default {
 	plugins: [
 		babel(babelrc()),
 		nodeResolve(),
-		commonjs()
+		commonjs({
+			include: 'node_modules/**'
+		})
 	],
-	external:['debug.js'],
+	external: ['debug.js'],
 	targets: [{
 		dest: 'dist/index.js',
 		format: 'cjs',
@@ -24,4 +26,3 @@ export default {
 		sourceMap: true
 	}]
 };
-
